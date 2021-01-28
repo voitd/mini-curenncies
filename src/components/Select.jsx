@@ -23,7 +23,9 @@ const StyledForm = styled.form`
 `;
 
 const StyledText = styled.p`
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
   color: cadetblue;
   padding-left: 1rem;
 `;
@@ -41,11 +43,8 @@ const StyledSelect = styled.select`
     display: flex;
     white-space: pre;
     min-height: 1rem;
-    padding: 0px 2px 1px;
   }
-  appearance: none;
   cursor: pointer;
-  font-weight: 700;
 `;
 const Label = styled.label`
   display: flex;

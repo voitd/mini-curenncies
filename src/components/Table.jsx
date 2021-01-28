@@ -69,7 +69,7 @@ const Table = ({ isSettings }) => {
     <StyledTable>
       <List>
         {Object.entries(coll).map(([curr, rate]) => {
-          const actualAmount = rate * (amount === '' ? 1 : amount)
+          const actualAmount = rate * amount
           const actualRate = !isSettings ? actualAmount : rate;
           const isFavorite = favorites.includes(curr);
 

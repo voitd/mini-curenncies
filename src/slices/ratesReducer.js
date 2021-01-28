@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import _ from 'lodash';
 
 export const getRates = createAsyncThunk(
   'currency/getRates',
@@ -20,10 +21,10 @@ const { actions, reducer } = createSlice({
   },
   reducers: {
     updateAmount(state, { payload }) {
+      console.log('payload ->', payload); // eslint-disable-line no-console
       state.amount = payload;
     },
     updateBase(state, { payload }) {
-      console.log('payload ->', payload); // eslint-disable-line no-console
       state.base = payload;
     },
     toggleFavorites(state, { payload }) {
@@ -45,8 +46,12 @@ const { actions, reducer } = createSlice({
 
 export default reducer;
 export const { updateAmount, updateBase, toggleFavorites } = actions;
-
-export const ratesSelector = state => state.currency.rates;
+export const ratesSelector = state => state.currency.rates
+// export const rateSelector = state =>{ 
+//   const {currency: {favorites, rates }} = state;
+//   const sortedRates = _.orderBy(rates, favorites, 'desc')
+//   console.log('sortedRates ->', sortedRates); // eslint-disable-line no-console
+// }
 export const baseSelector = state => state.currency.base;
 export const favoritesSelector = state => state.currency.favorites;
 export const amountSelector = state => state.currency.amount;

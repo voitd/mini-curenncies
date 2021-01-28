@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
 import styled from 'styled-components';
-
+import _ from 'lodash';
 import { baseSelector, updateAmount } from '../slices/ratesReducer';
 
 const StyledForm = styled.form`
@@ -25,9 +25,10 @@ const Input = styled.input`
   }
   border: none;
   width: 90%;
-  font-size: 3rem;
+  font-size: 2.1rem;
   color: CadetBlue;
   margin-left: 10px;
+  padding: 0.5rem;
 `;
 
 const Button = styled.button`
@@ -51,6 +52,7 @@ const Form = () => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const baseCurrency = useSelector(baseSelector);
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);
@@ -63,7 +65,11 @@ const Form = () => {
   };
 
   const handleChange = ({target}) => {
-    dispatch(updateAmount(target.value));
+    let { value } = target
+    if (!Number(value) || value === "") {
+      value = 1
+    }
+    dispatch(updateAmount(value));
   };
 
   const formik = useFormik({
@@ -73,7 +79,6 @@ const Form = () => {
     validationSchema: Yup.object({
       rate: Yup.number('Must be number')
         .positive('Must be positive')
-        .moreThan(0, 'Not be zero')
     }),
     onSubmit: handleSubmit,
     onChange: handleChange,
