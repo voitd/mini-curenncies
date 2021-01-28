@@ -22,19 +22,20 @@ const StyledTable = styled.section`
   align-items: center;
   justify-content: center;
   flex-flow: column wrap;
-  // margin: 5%;
   padding-bottom: 2rem;
   width: 90%;
   font-size: 2rem;
   overflow-y: auto;
-
-  // color: CadetBlue;
 `;
 
 const List = styled.ul`
   overflow-y: auto;
   list-style: none;
   width: 90%;
+
+&::-webkit-scrollbar {
+    display: none;
+}
 `;
 
 const Item = styled.li`
