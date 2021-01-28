@@ -68,7 +68,7 @@ const Form = () => {
 
   const formik = useFormik({
     initialValues: {
-      rate: '1',
+      rate: '',
     },
     validationSchema: Yup.object({
       rate: Yup.number('Must be number')
@@ -94,10 +94,10 @@ const Form = () => {
         {formik.errors.rate && (
           <ErrorMessage>{formik.errors.rate}</ErrorMessage>
         )}
-        <Button type="submit" disabled={formik.isSubmitting}>
-          Go!
-        </Button>
-      </StyledForm>
+        {/* <Button type="submit" disabled={formik.isSubmitting}> */}
+        {/*   Go! */}
+        {/* </Button> */}
+       </StyledForm>
   );
 };
 
