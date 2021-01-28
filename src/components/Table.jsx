@@ -9,6 +9,7 @@ import styled from 'styled-components';
 
 import {
   amountSelector,
+  baseSelector,
   favoritesSelector,
   ratesSelector,
   toggleFavorites,
@@ -31,7 +32,7 @@ const StyledTable = styled.section`
 `;
 
 const List = styled.ul`
-overflow-y: auto;
+  overflow-y: auto;
   list-style: none;
   width: 90%;
 `;
@@ -46,7 +47,7 @@ const Text = styled.p`
   flex-grow: 1;
 `;
 const TextBold = styled.b`
-  padding: 0 1.5rem;
+  padding: 0 0.5rem;
 `;
 
 const Table = ({ isSettings }) => {
@@ -54,6 +55,7 @@ const Table = ({ isSettings }) => {
   const rates = useSelector(ratesSelector);
   const favorites = useSelector(favoritesSelector);
   const amount = useSelector(amountSelector);
+  const baseCurrency = useSelector(baseSelector);
 
   const coll = isSettings ? rates : _.pick(rates, favorites);
 
@@ -75,7 +77,8 @@ const Table = ({ isSettings }) => {
           return (
             <Item key={curr}>
               <Text>{curr}</Text>
-              <TextBold>{actualRate.toFixed(2).toString()}</TextBold>
+              <TextBold>{actualRate.toFixed(2).toString()} </TextBold>
+              {baseCurrency}
               {/* <Text> */}
               {isSettings && (
                 <FontAwesomeIcon
@@ -84,6 +87,7 @@ const Table = ({ isSettings }) => {
                   color={color}
                   id={curr}
                   onClick={handleClick}
+                  style={{ marginLeft: '10px' }}
                 />
               )}
               {/* </Text> */}

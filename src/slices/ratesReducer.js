@@ -23,6 +23,7 @@ const { actions, reducer } = createSlice({
       state.amount = payload;
     },
     updateBase(state, { payload }) {
+      console.log('payload ->', payload); // eslint-disable-line no-console
       state.base = payload;
     },
     toggleFavorites(state, { payload }) {

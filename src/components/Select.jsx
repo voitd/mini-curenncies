@@ -1,8 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { baseSelector, getRates, updateBase } from '../slices/ratesReducer';
+import {
+  baseSelector,
+  getRates,
+  ratesSelector,
+  updateBase,
+} from '../slices/ratesReducer';
 
 const StyledForm = styled.form`
   padding: 0.5em;
@@ -17,29 +22,6 @@ const StyledForm = styled.form`
   background: white;
 `;
 
-const Input = styled.input`
-  &:focus {
-    outline: none;
-  }
-  border: none;
-  width: 90%;
-  font-size: 3rem;
-  color: cadetblue;
-  margin-left: 10px;
-`;
-
-const Button = styled.button`
-  display: inline-block;
-  color: cadetblue;
-  font-size: 1.2em;
-  padding: 0.5em;
-  border-radius: 10px;
-  border: 2px solid cadetblue;
-  display: block;
-  cursor: pointer;
-  background: white;
-`;
-
 const StyledText = styled.p`
   font-size: 1.5rem;
   color: cadetblue;
@@ -50,11 +32,9 @@ const StyledSelect = styled.select`
   &:focus {
     outline: none;
   }
-  color: gray;
   padding-left: 0.5rem;
   font-size: 1.2rem;
   border: none;
-  margin-left: 0.5rem;
   display: flex;
   option {
     background: white;
@@ -65,6 +45,7 @@ const StyledSelect = styled.select`
   }
   appearance: none;
   cursor: pointer;
+  font-weight: 700;
 `;
 const Label = styled.label`
   display: flex;
@@ -75,26 +56,35 @@ const Label = styled.label`
 const Select = () => {
   const dispatch = useDispatch();
   const baseCurrency = useSelector(baseSelector);
+  const rates = useSelector(ratesSelector);
 
-  const handleChange = currency => {
-    dispatch(getRates(currency));
-  };
-  const handleSubmit = currency => {
-    dispatch(updateBase(currency));
+ useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(getRates(baseCurrency)).catch(err =>
+        console.error(err),
+      );
+    };
+    fetchData();
+  }, [dispatch, baseCurrency]);
+
+  const handleChange = ({target}) => {
+    const { value } = target
+    dispatch(updateBase(value));
   };
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm >
       <Label>
         <StyledText>Select currency:</StyledText>
         <StyledSelect value={baseCurrency} onChange={handleChange}>
-          <option value="grapefruit">Грейпфрут</option>
-          <option value="lime">Лайм</option>
-          <option value="coconut">Кокос</option>
-          <option value="mango">Манго</option>
+          {Object.keys(rates).map((curr, i) => (
+            <option key={i} value={curr}>
+              {curr}
+            </option>
+          ))}
         </StyledSelect>
       </Label>
-      <Button type="submit">Get! </Button>{' '}
+      {/* <Button type="submit">Get!</Button> */}
     </StyledForm>
   );
 };

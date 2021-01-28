@@ -1,9 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
+import { useDispatch } from 'react-redux';
 import React from 'react';
 import styled from 'styled-components';
 
+import { updateAmount } from '../slices/ratesReducer';
 import Select from './Select';
 import Table from './Table';
 
@@ -32,34 +34,25 @@ const SearchBar = styled.div`
   justify-content: space-between;
   flex-direction: row;
   margin: 5%;
-  width: 90%;
-`;
-
-const Wrapper = styled.div`
-  padding: 0.8em;
-  margin: 0.5em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 82%;
 `;
 
 const Settings = () => {
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(updateAmount(1));
+  }
   return (
     <Main>
       <SearchBar>
         <Select />
-        <Link to="/" className="link">
-          {/* <Wrapper> */}
+        <Link to="/" className="link" onClick={handleClick}>
           <FontAwesomeIcon
             className="star"
             icon={faTimesCircle}
             color={'CadetBlue'}
             size={'3x'}
           />
-          {/* </Wrapper> */}
         </Link>
       </SearchBar>
       <Table isSettings={true} />

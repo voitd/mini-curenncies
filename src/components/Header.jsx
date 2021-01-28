@@ -9,7 +9,7 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: start;
   background: white;
-  // box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.2);
 
   background: linear-gradient(
     to right bottom,

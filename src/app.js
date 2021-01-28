@@ -15,12 +15,12 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+
   #root {
     display: flex;
     align-items: center;
     justify-content: start;
     flex-direction: column;
-
   }
 
   body {
@@ -36,8 +36,6 @@ const app = () => {
   const devtoolMiddleware = ext && ext();
   /* eslint-enable */
 
-  // const ratesData = Cookies.getJSON('rates') ?? getRates();
-  // Cookies.set('rates', ratesData);
   const store = configureStore({ reducer: rootReducer, devtoolMiddleware });
 
   render(

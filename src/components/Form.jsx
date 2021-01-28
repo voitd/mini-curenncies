@@ -1,10 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
 import styled from 'styled-components';
 
-import { updateAmount } from '../slices/ratesReducer';
+import { baseSelector, updateAmount } from '../slices/ratesReducer';
 
 const StyledForm = styled.form`
   padding: 0.5em;
@@ -50,7 +50,7 @@ const ErrorMessage = styled.p`
 const Form = () => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-
+  const baseCurrency = useSelector(baseSelector);
   useEffect(() => {
     inputRef.current.focus();
   }, []);
@@ -62,28 +62,25 @@ const Form = () => {
     setSubmitting(false);
   };
 
-  const handleChange = (values, actions) => {
-    const { rate } = values;
-    console.log('rate ->', rate); // eslint-disable-line no-console
-    dispatch(updateAmount(rate));
+  const handleChange = ({target}) => {
+    dispatch(updateAmount(target.value));
   };
 
   const formik = useFormik({
     initialValues: {
-      rate: '',
+      rate: '1',
     },
     validationSchema: Yup.object({
       rate: Yup.number('Must be number')
         .positive('Must be positive')
-        // .required(),
+        .moreThan(0, 'Not be zero')
     }),
     onSubmit: handleSubmit,
     onChange: handleChange,
   });
 
   return (
-    <>
-      <StyledForm onSubmit={formik.handleSubmit}>
+      <StyledForm onSubmit={formik.handleSubmit} onChange={handleChange}>
         <Input
           type="text"
           ref={inputRef}
@@ -92,14 +89,15 @@ const Form = () => {
           value={formik.values.rate}
           disabled={formik.isSubmitting}
           name="rate"
-          placeholder="0"
+          placeholder={`1 ${baseCurrency}`}
         />
-        {formik.errors.rate && <ErrorMessage>{formik.errors.rate}</ErrorMessage>}
-        <Button type="submit" >
+        {formik.errors.rate && (
+          <ErrorMessage>{formik.errors.rate}</ErrorMessage>
+        )}
+        <Button type="submit" disabled={formik.isSubmitting}>
           Go!
         </Button>
       </StyledForm>
-    </>
   );
 };
 
