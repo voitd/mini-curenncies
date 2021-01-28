@@ -46,7 +46,7 @@ const Text = styled.p`
   flex-grow: 1;
 `;
 const TextBold = styled.b`
-  padding: 0 0.5rem;
+  padding: 0 1.5rem;
 `;
 
 const Table = ({ isSettings }) => {

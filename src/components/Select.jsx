@@ -36,7 +36,7 @@ const Button = styled.button`
   border-radius: 10px;
   border: 2px solid cadetblue;
   display: block;
-
+  cursor: pointer;
   background: white;
 `;
 
@@ -63,6 +63,8 @@ const StyledSelect = styled.select`
     min-height: 1rem;
     padding: 0px 2px 1px;
   }
+  appearance: none;
+  cursor: pointer;
 `;
 const Label = styled.label`
   display: flex;

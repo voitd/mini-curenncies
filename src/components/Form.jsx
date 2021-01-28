@@ -39,6 +39,7 @@ const Button = styled.button`
   border: 2px solid CadetBlue;
   display: block;
   background: white;
+  cursor: pointer;
 `;
 
 const ErrorMessage = styled.p`
