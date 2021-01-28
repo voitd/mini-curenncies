@@ -45,10 +45,12 @@ const Item = styled.li`
 `;
 
 const Text = styled.p`
-  flex-grow: 1;
+
+  padding: 0 0.5rem;
 `;
 const TextBold = styled.b`
-  padding: 0 0.5rem;
+
+  flex-grow: 1;
 `;
 
 const Table = ({ isSettings }) => {
@@ -78,10 +80,8 @@ const Table = ({ isSettings }) => {
 
           return (
             <Item key={curr}>
+              <TextBold>{actualRate.toFixed(2).toString()}</TextBold>
               <Text>{curr}</Text>
-              <TextBold>{actualRate.toFixed(2).toString()} </TextBold>
-              {baseCurrency}
-              {/* <Text> */}
               {isSettings && (
                 <FontAwesomeIcon
                   role="button"
@@ -92,7 +92,6 @@ const Table = ({ isSettings }) => {
                   style={{ marginLeft: '10px' }}
                 />
               )}
-              {/* </Text> */}
             </Item>
           );
         })}

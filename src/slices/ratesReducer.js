@@ -21,7 +21,6 @@ const { actions, reducer } = createSlice({
   },
   reducers: {
     updateAmount(state, { payload }) {
-      console.log('payload ->', payload); // eslint-disable-line no-console
       state.amount = payload;
     },
     updateBase(state, { payload }) {

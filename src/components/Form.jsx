@@ -31,16 +31,13 @@ const Input = styled.input`
   padding: 0.5rem;
 `;
 
-const Button = styled.button`
-  display: inline-block;
+const Button = styled.div`
   color: CadetBlue;
   font-size: 1.5em;
-  padding: 0.5em;
+  padding: 0.4em;
   border-radius: 10px;
-  border: 2px solid CadetBlue;
-  display: block;
+  border: 1px solid CadetBlue;
   background: white;
-  cursor: pointer;
 `;
 
 const ErrorMessage = styled.p`
@@ -64,12 +61,12 @@ const Form = () => {
     setSubmitting(false);
   };
 
-  const handleChange = ({target}) => {
-    let { value } = target
-    if (!Number(value) || value === "") {
-      value = 1
+  const handleChange = ({ target }) => {
+    let { value } = target;
+    if (!Number(value) || value === '') {
+      value = 1;
     }
-    dispatch(updateAmount(value));
+    dispatch(updateAmount(Number(value)));
   };
 
   const formik = useFormik({
@@ -77,32 +74,29 @@ const Form = () => {
       rate: '',
     },
     validationSchema: Yup.object({
-      rate: Yup.number('Must be number')
-        .positive('Must be positive')
+      rate: Yup.number().integer('Must be number').positive('Must be positive'),
     }),
     onSubmit: handleSubmit,
     onChange: handleChange,
   });
 
   return (
-      <StyledForm onSubmit={formik.handleSubmit} onChange={handleChange}>
-        <Input
-          type="text"
-          ref={inputRef}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.rate}
-          disabled={formik.isSubmitting}
-          name="rate"
-          placeholder={`1 ${baseCurrency}`}
-        />
-        {formik.errors.rate && (
-          <ErrorMessage>{formik.errors.rate}</ErrorMessage>
-        )}
-        {/* <Button type="submit" disabled={formik.isSubmitting}> */}
-        {/*   Go! */}
-        {/* </Button> */}
-       </StyledForm>
+    <StyledForm onSubmit={formik.handleSubmit} onChange={handleChange}>
+      <Input
+        type="text"
+        ref={inputRef}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.rate}
+        disabled={formik.isSubmitting}
+        name="rate"
+        placeholder='1'
+      />
+      {formik.errors.rate && <ErrorMessage>{formik.errors.rate}</ErrorMessage>}
+      <Button type="submit"> 
+        {baseCurrency}
+      </Button>
+    </StyledForm>
   );
 };
 
