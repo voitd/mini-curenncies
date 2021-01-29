@@ -55,7 +55,7 @@ const Settings = () => {
           />
         </Link>
       </SearchBar>
-      <Table isSettings={true} />
+      <Table isSettings />
     </Main>
   );
 };

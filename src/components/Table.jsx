@@ -9,7 +9,6 @@ import styled from 'styled-components';
 
 import {
   amountSelector,
-  baseSelector,
   favoritesSelector,
   ratesSelector,
   toggleFavorites,
@@ -22,6 +21,7 @@ const StyledTable = styled.section`
   align-items: center;
   justify-content: center;
   flex-flow: column wrap;
+
   padding-bottom: 2rem;
   width: 90%;
   font-size: 2rem;
@@ -33,9 +33,9 @@ const List = styled.ul`
   list-style: none;
   width: 90%;
 
-&::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
-}
+  }
 `;
 
 const Item = styled.li`
@@ -45,11 +45,10 @@ const Item = styled.li`
 `;
 
 const Text = styled.p`
-
   padding: 0 0.5rem;
 `;
-const TextBold = styled.b`
 
+const TextBold = styled.b`
   flex-grow: 1;
 `;
 
@@ -58,12 +57,11 @@ const Table = ({ isSettings }) => {
   const rates = useSelector(ratesSelector);
   const favorites = useSelector(favoritesSelector);
   const amount = useSelector(amountSelector);
-  const baseCurrency = useSelector(baseSelector);
 
   const coll = isSettings ? rates : _.pick(rates, favorites);
 
   const handleClick = ({ target }) => {
-    const { id } = target;
+    const { id } = target.closest('svg');
     dispatch(toggleFavorites(id.toString()));
   };
 
@@ -71,11 +69,11 @@ const Table = ({ isSettings }) => {
     <StyledTable>
       <List>
         {Object.entries(coll).map(([curr, rate]) => {
-          const actualAmount = rate * amount
+          const actualAmount = rate * amount;
           const actualRate = !isSettings ? actualAmount : rate;
           const isFavorite = favorites.includes(curr);
 
-          // const icon = isFavorite ? fasStar : farStar;
+          const icon = isFavorite ? fasStar : farStar;
           const color = isFavorite ? 'gold' : 'gray';
 
           return (
@@ -84,8 +82,7 @@ const Table = ({ isSettings }) => {
               <Text>{curr}</Text>
               {isSettings && (
                 <FontAwesomeIcon
-                  role="button"
-                  icon={farStar}
+                  icon={icon}
                   color={color}
                   id={curr}
                   onClick={handleClick}

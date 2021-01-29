@@ -45,12 +45,16 @@ const { actions, reducer } = createSlice({
 
 export default reducer;
 export const { updateAmount, updateBase, toggleFavorites } = actions;
-export const ratesSelector = state => state.currency.rates
-// export const rateSelector = state =>{ 
-//   const {currency: {favorites, rates }} = state;
-//   const sortedRates = _.orderBy(rates, favorites, 'desc')
-//   console.log('sortedRates ->', sortedRates); // eslint-disable-line no-console
-// }
+
+export const ratesSelector = state => {
+  const {
+    currency: { favorites, rates },
+  } = state;
+  const getFavorites = _.pick(rates, favorites);
+  const omitFavorites = _.omit(rates, favorites);
+  return { ...getFavorites, ...omitFavorites };
+};
+
 export const baseSelector = state => state.currency.base;
 export const favoritesSelector = state => state.currency.favorites;
 export const amountSelector = state => state.currency.amount;

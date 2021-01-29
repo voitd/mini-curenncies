@@ -15,7 +15,6 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-
   #root {
     display: flex;
     align-items: center;

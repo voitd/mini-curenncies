@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -15,10 +15,8 @@ const StyledForm = styled.form`
   align-items: center;
   justify-content: space-between;
   border: none;
-  // width: 100%;
   border-radius: 10px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.2);
-
   background: white;
 `;
 
@@ -45,13 +43,16 @@ const StyledSelect = styled.select`
     min-height: 1rem;
   }
   cursor: pointer;
+  appearance: none;
 `;
+
 const Label = styled.label`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0 0.5rem;
 `;
+
 const Select = () => {
   const dispatch = useDispatch();
   const baseCurrency = useSelector(baseSelector);
@@ -83,7 +84,6 @@ const Select = () => {
           ))}
         </StyledSelect>
       </Label>
-      {/* <Button type="submit">Get!</Button> */}
     </StyledForm>
   );
 };
