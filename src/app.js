@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
     align-items: center;
     justify-content: start;
     flex-direction: column;
+    min-height: 100vh;
   }
 
   body {
