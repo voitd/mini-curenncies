@@ -8,6 +8,7 @@ const StyledFooter = styled.footer`
   align-items: center;
   justify-content: space-evenly;
   margin-top: auto;
+  margin-bottom: 2rem;
 `;
 
 const Footer = () => {
