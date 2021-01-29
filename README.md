@@ -9,7 +9,7 @@ Mini Currencies</h3>
   
   <img width="720" alt="Снимок экрана 2021-01-29 в 04 07 36" src="https://user-images.githubusercontent.com/60138143/106223077-700b6000-61e9-11eb-8d0d-acdc1e6bc16f.png">
   </p>
-  <h4 align="center"><a href="https://mini-curenncies.vercel.app/" target="_blank"><strong>Demo on Vercel</strong></a></h4>
+  <h4 align="center"><a href="https://mini-currencies.vercel.app/" target="_blank"><strong>Demo on Vercel</strong></a></h4>
   
 </p>
 
