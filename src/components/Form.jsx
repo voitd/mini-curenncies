@@ -55,10 +55,11 @@ const Form = () => {
 
   const handleChange = ({ target }) => {
     let { value } = target;
-    if (!Number(value) || value === '') {
-      value = 1;
+    let amount = Number(value)
+    if (Number.isNaN(amount) || amount === 0) {
+      amount = 1;
     }
-    dispatch(updateAmount(Number(value)));
+    dispatch(updateAmount(amount));
   };
 
   const formik = useFormik({
